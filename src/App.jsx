@@ -1,9 +1,7 @@
-import './App.css'
-
 export default function App() {
-  return (
-    <main>
-      React ⚛️ + Vite ⚡ + Replit
-    </main>
-  )
+    return (
+        <main>
+            <h1>Tenzies</h1>
+        </main>
+    );
 }
