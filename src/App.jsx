@@ -6,17 +6,27 @@ export default function App() {
     const [dice, setDice] = useState(generateAllNewDice());
     
     function generateAllNewDice() {
-        return new Array(10).fill(0).map((_, index) => {
-            return <Die id={index} value={Math.ceil(Math.random()*6)}/>
+        return new Array(10).fill(0).map(() => {
+            return Math.ceil(Math.random()*6)
         });
     }
+
+    function rollDice() {
+        setDice(generateAllNewDice());
+    }
+
+    const diceElements = dice.map((die, index) => {
+        return <Die key={index} value={die} />
+    })
 
     generateAllNewDice();
     return (
         <main>
             <div className='die-container'>
-                {dice}
+                {diceElements}
             </div>
+
+            <button className='roll-dice' onClick={rollDice}>Roll Dice</button>
         </main>
     );
 }
