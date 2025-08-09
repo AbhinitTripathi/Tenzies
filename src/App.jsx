@@ -5,21 +5,40 @@ export default function App() {
 
     const [dice, setDice] = useState(generateAllNewDice());
     
+    // Default dice state
     function generateAllNewDice() {
-        return new Array(10).fill(0).map(() => {
-            return Math.ceil(Math.random()*6)
+        return new Array(10).fill({}).map((_, i) => {
+            return {
+                id: i,
+                value: Math.ceil(Math.random() * 6),
+                isHeld: false
+            }
         });
     }
 
+    // Generate new state when 'Role Dice' is clicked
     function rollDice() {
         setDice(generateAllNewDice());
     }
 
-    const diceElements = dice.map((die, index) => {
-        return <Die key={index} value={die} />
+    // Pass down to Die component to change isHeld when clicked
+    function hold( inID) {
+        setDice(prevDice => {
+            return prevDice.map(die => {
+                if(inID === die.id) {
+                    return {
+                        ...die,
+                        isHeld: !die.isHeld
+                    }
+                }
+            })
+        })
+    }
+
+    const diceElements = dice.map(die => {
+        return <Die key={die.id} id={die.id} value={die.value} isHeld={die.isHeld} hold={hold}/>
     })
 
-    generateAllNewDice();
     return (
         <main>
             <div className='die-container'>

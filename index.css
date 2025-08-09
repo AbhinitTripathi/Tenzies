@@ -54,6 +54,12 @@ main {
     cursor: pointer;
     transition: all 0.1s ease-in-out;
 }
+.die-container button:hover {
+    transform: scale(1.1);
+}
+.die-container button:active {
+    transform: scale(1);
+}
 
 /* ###################### ROLL BUTTON ###################### */
 .roll-dice {
