@@ -1,11 +1,26 @@
 import Die from "./components/Die.jsx";
 import { useState, useRef, useEffect } from "react";
-import Confetti from "./components/Confetti.jsx"
+import Confetti from "./components/Confetti.jsx";
+import dieRollSound from './assets/die-roll.mp3';
+import gameWonSound from './assets/game-won.mp3';
 
 export default function App() {
     const [dice, setDice] = useState(() => generateAllNewDice());
     const rollCounter = useRef(0);
     const gameWon = dice.every(die => die.isHeld && die.value === dice[0].value);
+
+    // Game Audio: Roll and Win
+    const dieRollAudioRef = useRef(new Audio(dieRollSound));
+    const playDieRollSound = () => {
+        const audio = dieRollAudioRef.current;
+        audio.currentTime = 0; // rewind to start
+        audio.play();
+    };
+
+    const gameWonAudioRef = useRef(new Audio(gameWonSound));
+    if(gameWon) {
+        gameWonAudioRef.current.play();
+    }
     
     // Focus on new game button when game is won
     const newGameRef = useRef(null);
@@ -30,6 +45,7 @@ export default function App() {
     function rollDice(e) {
         if(e.target.innerText === "Roll") {
             rollCounter.current++;
+            playDieRollSound();
             setDice((prevDice) => {
                 return prevDice.map((die) => {
                     return die.isHeld
