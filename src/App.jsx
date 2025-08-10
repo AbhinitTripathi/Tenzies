@@ -20,7 +20,7 @@ export default function App() {
         return new Array(10).fill({}).map((_, i) => {
             return {
                 id: i,
-                value: 5, //Math.ceil(Math.random() * 6),
+                value: Math.ceil(Math.random() * 6),
                 isHeld: false,
             };
         });

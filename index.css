@@ -44,6 +44,7 @@ main {
     align-items: center;
 }
 
+/* For when the game is done */
 .blur {
     position: absolute;
     top: 0;
@@ -59,7 +60,6 @@ main {
     font-size: 2rem;
     font-weight: 700;
     color: #FFF;
-    /* pointer-events: none; */
     z-index: 1;
 }
 /* ###################### DIE CONTAINER & DICE ###################### */
@@ -103,6 +103,71 @@ main {
 .die-container button:active {
     transform: scale(1);
 }
+
+/* Die PIPS */
+.die {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    padding: 6px;
+
+    /* Flip animation support */
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease;
+}
+
+/* Flip effect when rolling */
+.flipping {
+    transform: rotateY(180deg); /* You can also try rotateX for vertical flip */
+}
+
+.pip {
+    width: 10px;
+    height: 10px;
+    background: black;
+    border-radius: 50%;
+    margin: auto;
+    opacity: 0; /* hidden by default */
+    transition: opacity 0.3s ease;
+}
+
+/* Hide pips during flip for cleaner animation */
+.flipping .pip {
+    opacity: 0;
+}
+
+/* Pip patterns for each face */
+.face-1 .pip:nth-child(5) { opacity: 1; }
+
+.face-2 .pip:nth-child(1),
+.face-2 .pip:nth-child(9) { opacity: 1; }
+
+.face-3 .pip:nth-child(1),
+.face-3 .pip:nth-child(5),
+.face-3 .pip:nth-child(9) { opacity: 1; }
+
+.face-4 .pip:nth-child(1),
+.face-4 .pip:nth-child(3),
+.face-4 .pip:nth-child(7),
+.face-4 .pip:nth-child(9) { opacity: 1; }
+
+.face-5 .pip:nth-child(1),
+.face-5 .pip:nth-child(3),
+.face-5 .pip:nth-child(5),
+.face-5 .pip:nth-child(7),
+.face-5 .pip:nth-child(9) { opacity: 1; }
+
+.face-6 .pip:nth-child(1),
+.face-6 .pip:nth-child(3),
+.face-6 .pip:nth-child(4),
+.face-6 .pip:nth-child(6),
+.face-6 .pip:nth-child(7),
+.face-6 .pip:nth-child(9) { opacity: 1; }
+
+
 
 /* ###################### ROLL BUTTON ###################### */
 .roll-dice {
