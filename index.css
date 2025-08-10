@@ -34,11 +34,25 @@ main {
 }
 
 /* ###################### DIE CONTAINER & DICE ###################### */
+.title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #2B283A;
+}
+
+.instructions {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #2B283A;
+    text-align: center;
+    width: 80%
+}
 
 .die-container {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
+    margin-bottom: 40px;
 }
 
 .die-container button {

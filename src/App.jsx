@@ -17,16 +17,22 @@ export default function App() {
 
     // Generate new state when 'Role Dice' is clicked
     function rollDice() {
-        setDice(generateAllNewDice());
+        setDice((prevDice) => {
+            return prevDice.map((die) => {
+                return die.isHeld
+                    ? die
+                    : { ...die, value: Math.ceil(Math.random() * 6) };
+            });
+        });
     }
 
     // Pass down to Die component to change isHeld when clicked
     function hold(inID) {
-        setDice(prevDice => {
-            return prevDice.map(die => {
-                return die.id === inID ? {...die, isHeld: !die.isHeld} : die
-            })
-        })
+        setDice((prevDice) => {
+            return prevDice.map((die) => {
+                return die.id === inID ? { ...die, isHeld: !die.isHeld } : die;
+            });
+        });
     }
 
     const diceElements = dice.map((die) => {
@@ -43,6 +49,11 @@ export default function App() {
 
     return (
         <main>
+            <h1 className="title">Tenzies</h1>
+            <p className="instructions">
+                Roll until all dice are the same. Click each die to freeze it at
+                its current value between rolls.
+            </p>
             <div className="die-container">{diceElements}</div>
 
             <button className="roll-dice" onClick={rollDice}>
